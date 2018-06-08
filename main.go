@@ -44,7 +44,7 @@ func main() {
 		cli.StringSliceFlag{
 			Name:   "files",
 			Usage:  "list of files to sign",
-			EnvVar: "PLUGIN_FILES",
+			EnvVar: "PLUGIN_FILES,PLUGIN_FILE",
 		},
 	}
 
@@ -58,8 +58,8 @@ func run(c *cli.Context) error {
 		Config: Config{
 			Key:        c.String("key"),
 			Passphrase: c.String("passphrase"),
-			Detach:     c.Bool("detach"),
-			Clear:      c.Bool("clear"),
+			Detach:     c.Bool("detach-sign"),
+			Clear:      c.Bool("clear-sign"),
 			Files:      c.StringSlice("files"),
 		},
 	}

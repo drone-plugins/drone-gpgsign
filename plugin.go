@@ -19,6 +19,7 @@ type (
 		Detach     bool
 		Clear      bool
 		Files      []string
+		Excludes   []string
 	}
 
 	Plugin struct {
@@ -27,12 +28,21 @@ type (
 )
 
 func (p *Plugin) Exec() error {
+	excludes := make([]string, 0)
 	files := make([]string, 0)
 
-	key, err := base64.StdEncoding.DecodeString(p.Config.Key)
+	for _, name := range p.Config.Excludes {
+		matches, err := zglob.Glob(name)
 
-	if err != nil {
-		key = []byte(p.Config.Key)
+		if err != nil {
+			return errors.Wrap(err, "failed to match excludes")
+		}
+
+		for _, match := range matches {
+			if _, err := os.Stat(match); err == nil {
+				excludes = append(excludes, match)
+			}
+		}
 	}
 
 	for _, name := range p.Config.Files {
@@ -43,7 +53,16 @@ func (p *Plugin) Exec() error {
 		}
 
 		for _, match := range matches {
-			if _, err := os.Stat(match); err == nil {
+			excluded := false
+
+			for _, exclude := range excludes {
+				if match == exclude {
+					excluded = true
+					break
+				}
+			}
+
+			if _, err := os.Stat(match); err == nil && !excluded {
 				files = append(files, match)
 			}
 		}
@@ -52,6 +71,12 @@ func (p *Plugin) Exec() error {
 	if len(files) == 0 {
 		log.Printf("no files found")
 		return nil
+	}
+
+	key, err := base64.StdEncoding.DecodeString(p.Config.Key)
+
+	if err != nil {
+		key = []byte(p.Config.Key)
 	}
 
 	cmd := p.importKey()

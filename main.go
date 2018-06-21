@@ -46,6 +46,11 @@ func main() {
 			Usage:  "list of files to sign",
 			EnvVar: "PLUGIN_FILES,PLUGIN_FILE",
 		},
+		cli.StringSliceFlag{
+			Name:   "excludes",
+			Usage:  "list of exclude patters",
+			EnvVar: "PLUGIN_EXCLUDES,PLUGIN_EXCLUDE",
+		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
@@ -61,6 +66,7 @@ func run(c *cli.Context) error {
 			Detach:     c.Bool("detach-sign"),
 			Clear:      c.Bool("clear-sign"),
 			Files:      c.StringSlice("files"),
+			Excludes:   c.StringSlice("excludes"),
 		},
 	}
 

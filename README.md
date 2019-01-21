@@ -7,7 +7,6 @@
 [![](https://images.microbadger.com/badges/image/plugins/gpgsign.svg)](https://microbadger.com/images/plugins/gpgsign "Get your own image badge on microbadger.com")
 [![Go Doc](https://godoc.org/github.com/drone-plugins/drone-gpgsign?status.svg)](http://godoc.org/github.com/drone-plugins/drone-gpgsign)
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-gpgsign)](https://goreportcard.com/report/github.com/drone-plugins/drone-gpgsign)
-[![](https://images.microbadger.com/badges/image/plugins/gpgsign.svg)](https://microbadger.com/images/plugins/gpgsign "Get your own image badge on microbadger.com")
 
 Drone plugin to sign artifacts with [GnuPG](https://gnupg.org/). For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-gpgsign/).
 

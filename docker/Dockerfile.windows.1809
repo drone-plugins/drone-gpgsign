@@ -1,12 +1,10 @@
 # escape=`
-FROM plugins/base:windows-amd64
+FROM plugins/base:windows-1809
 
 LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" `
   org.label-schema.name="Drone GPGSign" `
   org.label-schema.vendor="Drone.IO Community" `
   org.label-schema.schema-version="1.0"
 
-# TODO: install gnupg
-
-ADD release\drone-gpgsign.exe c:\drone-gpgsign.exe
-ENTRYPOINT [ "c:\\drone-gpgsign.exe" ]
+ADD release/windows/amd64/drone-gpgsign.exe C:/bin/drone-gpgsign.exe
+ENTRYPOINT [ "C:\\bin\\drone-gpgsign.exe" ]

@@ -30,6 +30,11 @@ func main() {
 			EnvVar: "PLUGIN_PASSPHRASE,GPGSIGN_PASSPHRASE,GPG_PASSPHRASE",
 		},
 		cli.BoolFlag{
+			Name:   "armor",
+			Usage:  "append armor flag",
+			EnvVar: "PLUGIN_ARMOR",
+		},
+		cli.BoolFlag{
 			Name:   "detach-sign",
 			Usage:  "append detach sign flag",
 			EnvVar: "PLUGIN_DETACH_SIGN",
@@ -61,6 +66,7 @@ func run(c *cli.Context) error {
 		Config: Config{
 			Key:        c.String("key"),
 			Passphrase: c.String("passphrase"),
+			Armor:      c.Bool("armor"),
 			Detach:     c.Bool("detach-sign"),
 			Clear:      c.Bool("clear-sign"),
 			Files:      c.StringSlice("files"),

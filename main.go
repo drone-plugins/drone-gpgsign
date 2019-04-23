@@ -29,7 +29,7 @@ func main() {
 			Usage:  "passphrase for the key",
 			EnvVar: "PLUGIN_PASSPHRASE,GPGSIGN_PASSPHRASE,GPG_PASSPHRASE",
 		},
-		cli.BoolFlag{
+		cli.BoolTFlag{
 			Name:   "armor",
 			Usage:  "append armor flag",
 			EnvVar: "PLUGIN_ARMOR",

@@ -16,6 +16,7 @@ type (
 	Config struct {
 		Key        string
 		Passphrase string
+		Armor      bool
 		Detach     bool
 		Clear      bool
 		Files      []string
@@ -126,7 +127,10 @@ func (p *Plugin) signFile(name string) *exec.Cmd {
 	args := []string{
 		"--batch",
 		"--yes",
-		"--armor",
+	}
+
+	if p.Config.Armor {
+		args = append(args, "--armor")
 	}
 
 	if p.Config.Passphrase != "" {

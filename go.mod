@@ -2,6 +2,8 @@ module github.com/drone-plugins/drone-gpgsign
 
 go 1.19
 
+toolchain go1.26.10
+
 require (
 	github.com/mattn/go-zglob v0.0.4
 	github.com/pkg/errors v0.9.1
